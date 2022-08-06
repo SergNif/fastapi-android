@@ -1098,6 +1098,7 @@ async def get_an_item_email(*, session: Session = Depends(get_session), emailQue
     # # # with db as session:
     # session.commit()
     # session.refresh(item_to_update)
+    
     return item_to_update
 
     # dict_result = {'id': recyclpage.id}  # result.id}
