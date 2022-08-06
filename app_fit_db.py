@@ -1098,13 +1098,27 @@ async def get_an_item_email(*, session: Session = Depends(get_session), emailQue
     # # # with db as session:
     # session.commit()
     # session.refresh(item_to_update)
-    
+
     return item_to_update
 
     # dict_result = {'id': recyclpage.id}  # result.id}
     # diction = {**diction, **dict(list(new_item)[1:])}
     # diction = {**diction, **dict_result}
-    # print(f'{diction=}')
+    # print(f'{diction=}')      fastapi-android
+
+# …or create a new repository on the command line
+# echo "# fastapi-android" >> README.md
+# git init
+# git add README.md
+# git commit -m "first commit"
+# git branch -M main
+# git remote add origin https://github.com/SergNif/fastapi-android.git
+# git push -u origin main
+# …or push an existing repository from the command line
+# git remote add origin https://github.com/SergNif/fastapi-android.git
+# git branch -M main
+# git push -u origin main
+
 
     # return {**{"id": user_id}, **diction}
 
