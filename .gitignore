@@ -1,7 +1,7 @@
-/home/serg/fastapi/bin/**
-/home/serg/fastapi/fastapi-jwt/**
-/home/serg/fastapi/include/**
-/home/serg/fastapi/lib/**
-/home/serg/fastapi/lib64/**
-/home/serg/fastapi/__pycache__/**
-/home/serg/fastapi/share/**
+/home/serg/fastapi/bin
+/home/serg/fastapi/fastapi-jwt
+/home/serg/fastapi/include
+/home/serg/fastapi/lib
+/home/serg/fastapi/lib64
+/home/serg/fastapi/__pycache__
+/home/serg/fastapi/share
