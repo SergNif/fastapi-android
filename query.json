@@ -1,0 +1,98 @@
+{
+    "id": 5,
+    "page10Data": {
+        "id": 0,
+        "Nothing": false,
+        "date": "string",
+        "fastFood": false,
+        "fastSugar": false,
+        "laterNight": true,
+        "fitness_id": 0
+    },
+    "page1Data": {
+        "id": 0,
+        "man": false,
+        "woman": true,
+        "fitness_id": 0
+    },
+    "page3Data": {
+        "id": 0,
+        "age": 55,
+        "date": "stringM",
+        "height": 87,
+        "weight": 554.0,
+        "fitness_id": 0
+    },
+    "page4Data": {
+        "id": 0,
+        "date": "string",
+        "everyDayFitness": false,
+        "examine1_2TimesWeek": true,
+        "examine3_5TimesWeek": false,
+        "fastWalkOnFoot": false,
+        "minimalPhysicalActive": false,
+        "fitness_id": 0
+    },
+    "page5Data": {
+        "id": 0,
+        "chicken": false,
+        "date": "string",
+        "fish": false,
+        "meat": true,
+        "pork": false,
+        "seaFood": false,
+        "tyrkey": false,
+        "withoutFish": false,
+        "withoutMeat": false,
+        "fitness_id": 0
+    },
+    "page6Data": {
+        "id": 0,
+        "avocado": false,
+        "broccoli": false,
+        "cauliflower": false,
+        "cucumbers": false,
+        "date": "string",
+        "eggplant": true,
+        "mushrooms": false,
+        "tomato": false,
+        "zucchini": false,
+        "fitness_id": 0
+    },
+    "page7Data": {
+        "id": 0,
+        "cheese": true,
+        "cottage": false,
+        "date": "string",
+        "egg": false,
+        "kefir": false,
+        "nuts": false,
+        "yogurt": false,
+        "fitness_id": 0
+    },
+    "page8Data": {
+        "id": 0,
+        "coffee": false,
+        "date": "string",
+        "tea": false,
+        "waterSugarGas": true,
+        "waterWithoutGas": false,
+        "fitness_id": 0
+    },
+    "page9Data": {
+        "id": 0,
+        "InHome": false,
+        "OnFoot": false,
+        "date": "string",
+        "regularTraffic": true,
+        "workOffice": false,
+        "fitness_id": 0
+    },
+    "pageuser": {
+        "id":28,
+        "email": "x6c@x6c.x6c",
+        "fullName": "jack",
+        "passwordFB": "123456",
+        "fitness_id": 1
+    }
+}
