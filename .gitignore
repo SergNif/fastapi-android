@@ -1,7 +1,1 @@
-~/fastapi/bin/**
-~/fastapi/fastapi-jwt/**
-~/fastapiinclude/**
-~/fastapi/lib/**
-~/fastapi/lib64/**
-~/fastapi/__pycache__/**
-~/fastapishare/**
+*
