@@ -1,0 +1,30 @@
+{
+    {
+        "id": 1,
+        "name": "milk fff",
+        "description": "fat 22,5",
+        "price": 100,
+        "on_offer": true
+    },
+    {
+        "id": 2,
+        "name": "biscuits fff",
+        "description": "jam",
+        "price": 400,
+        "on_offer": true
+    },
+    {
+        "id": 3,
+        "name": "soap",
+        "description": "home",
+        "price": 40,
+        "on_offer": true
+    },
+    {
+        "id": 4,
+        "name": "blanket",
+        "description": "hot",
+        "price": 140,
+        "on_offer": true
+    }
+}

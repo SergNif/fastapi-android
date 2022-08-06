@@ -1,0 +1,98 @@
+{
+    "id": 5,
+    "page10Data": {
+      "id": 0,
+      "Nothing": false,
+      "date": "",
+      "fastFood": false,
+      "fastSugar": false,
+      "laterNight": false,
+      "fitness_id": 0
+    },
+    "page1Data": {
+      "id": 0,
+      "man": true,
+      "woman": true,
+      "fitness_id": 0
+    },
+    "page3Data": {
+      "id": 0,
+      "age": 0,
+      "date": "string",
+      "height": 0,
+      "weight": 0,
+      "fitness_id": 0
+    },
+    "page4Data": {
+      "id": 0,
+      "date": "string",
+      "everyDayFitness": true,
+      "examine1_2TimesWeek": true,
+      "examine3_5TimesWeek": true,
+      "fastWalkOnFoot": true,
+      "minimalPhysicalActive": true,
+      "fitness_id": 0
+    },
+    "page5Data": {
+      "id": 0,
+      "chicken": true,
+      "date": "string",
+      "fish": true,
+      "meat": true,
+      "pork": true,
+      "seaFood": true,
+      "tyrkey": true,
+      "withoutFish": true,
+      "withoutMeat": true,
+      "fitness_id": 0
+    },
+    "page6Data": {
+      "id": 0,
+      "avocado": true,
+      "broccoli": true,
+      "cauliflower": true,
+      "cucumbers": true,
+      "date": "string",
+      "eggplant": true,
+      "mushrooms": true,
+      "tomato": true,
+      "zucchini": true,
+      "fitness_id": 0
+    },
+    "page7Data": {
+      "id": 0,
+      "cheese": true,
+      "cottage": true,
+      "date": "string",
+      "egg": true,
+      "kefir": true,
+      "nuts": true,
+      "yogurt": true,
+      "fitness_id": 0
+    },
+    "page8Data": {
+      "id": 0,
+      "coffee": true,
+      "date": "string",
+      "tea": true,
+      "waterSugarGas": true,
+      "waterWithoutGas": true,
+      "fitness_id": 0
+    },
+    "page9Data": {
+      "id": 0,
+      "InHome": true,
+      "OnFoot": true,
+      "date": "string",
+      "regularTraffic": true,
+      "workOffice": true,
+      "fitness_id": 0
+    },
+    "pageuser": {
+      "id": 0,
+      "email": "string",
+      "passwordFB": "string",
+      "fullName": "string",
+      "fitness_id": 0
+    }
+  }
