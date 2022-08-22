@@ -211,6 +211,79 @@ async def patch_an_itemus(*, session: Session = Depends(get_session), user_id: i
 
     return {**{"id": user_id}, **d }  # dict(id = 5)
 
+@app.post('/fit_new_weight_day/{user_id}',  status_code=status.HTTP_201_CREATED)
+async def create_new_menu_day(*, session_recycl: Session = Depends(get_session_recycl),
+                              recyclpage: RecyclPage,
+                              user_id: int,
+                              ):
+    print(f' {recyclpage=}')
+
+
+    # with Session(engine_recycl) as session:
+    # item_to_update =  session_recycl.select(RecyclPage).where(RecyclPage.id == user_id)      #(RecyclPage, user_id)
+    item_to_update = session_recycl.exec(select(RecyclPage).where(RecyclPage.id == user_id).where(RecyclPage.date == recyclpage.date)).first()
+    # result = item_to_update.first()
+
+    # hero_data = result.dict(exclude_unset=True)
+    print(f' {item_to_update=} ')
+    if item_to_update is None:
+        item_to_upd = RecyclPage(
+        id = recyclpage.id,
+        date=recyclpage.date,
+        age = recyclpage.age,
+        time = recyclpage.time,
+        desired_weight = recyclpage.desired_weight,
+        height = recyclpage.height,
+        weight = recyclpage.weight,
+        
+        header = recyclpage.header,
+        menu = recyclpage.menu,
+        )
+        print(f' {item_to_upd=} ')
+        # item_to_update.fullName = userName.fullName
+        # item_to_update.email = userName.email
+        # item_to_update.password = userName.password
+        # item_to_update.fitness_id = user_id
+        
+        # with Session(engine_recycl) as session_bb:
+        session_recycl.add(item_to_upd)
+        session_recycl.commit()
+        session_recycl.refresh(item_to_upd)
+
+    if item_to_update is not None:
+        print(f' {item_to_update=} ')
+        item_to_update.id = recyclpage.id
+        item_to_update.age = recyclpage.age
+        item_to_update.time = recyclpage.time
+        item_to_update.desired_weight = recyclpage.desired_weight
+        item_to_update.height = recyclpage.height
+        item_to_update.weight = recyclpage.weight
+        item_to_update.weight = recyclpage.weight
+        item_to_update.header = recyclpage.header
+        item_to_update.menu = recyclpage.menu
+
+        session_recycl.add(item_to_update)
+        session_recycl.commit()
+        session_recycl.refresh(item_to_update)
+
+
+
+#     metadata_obj = MetaData()
+#     metadata_obj.reflect(bind=engine_recycl)
+# #     # for m in property_class:
+#     # tbl = [a for a in metadata_obj.sorted_tables]
+#     for tbl in reversed(metadata_obj.sorted_tables):
+#         # t = table('dataPage3', column('id'))
+#         # s = select(t).where(t.c.id == user_id)
+#         statement = tbl.select().where(tbl.c.id == user_id).where(tbl.c.date == recyclpage.date)
+#         print(f' {tbl.c=} ')
+#         # statement = tbl.select().where(tbl.name == 'dataPage3')
+#         result = session_recycl.exec(statement).first()
+#         print(f' {result=} ')
+    print(f' {session_recycl.exec(select(RecyclPage).where(RecyclPage.id == user_id).where(RecyclPage.date == recyclpage.date)).first()=}  ')
+
+    return {**{"id": user_id}}
+
 
 @app.patch('/fit_update_user_ddd/{user_id}',  status_code=status.HTTP_201_CREATED)
 async def patch_an_item(*, session: Session = Depends(get_session), user_id: int):
@@ -507,6 +580,9 @@ async def create_an_item(*, session: Session = Depends(get_session),
 
     # {{id:idQuery}:diction} #dict(list(result)[1:])
     return {**{"id": id_num}, **diction}
+
+
+
 
 
 @app.post('/fit_new_menu_day/{position}',  status_code=status.HTTP_201_CREATED)
@@ -957,6 +1033,7 @@ async def update_hero(*, session: Session = Depends(get_session), user_id: int, 
         hero_data = userData.dict(exclude_unset=True)
         for key, value in hero_data.items():
             setattr(db_hero, key, value)
+            print(f' { db_hero=} {key=} {value=} ')
         session.add(db_hero)
         session.commit()
         session.refresh(db_hero)
