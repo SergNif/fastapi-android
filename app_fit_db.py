@@ -1010,17 +1010,27 @@ async def update_to_user(*, session: Session = Depends(get_session), user_id: in
     # print(f' { item= }')
     statement = select(Userpage).where(Userpage.id == user_id)
     item_to_update = session.exec(statement).first()
-    print(f' 1 { item_to_update= }')
-
+    
     print(f' { item_to_update= }')
-    item_to_update.fullName = userName.fullName
-    item_to_update.email = userName.email
-    item_to_update.password = userName.password
-    item_to_update.fitness_id = user_id
+
+    with Session(engine) as session:
+        item_to_update = session.get(Userpage, user_id)
+
+        item_to_update.fullName = userName.fullName
+        item_to_update.email = userName.email
+        item_to_update.password = userName.password
+        item_to_update.fitness_id = user_id
+        
+        session.add(item_to_update)
+        session.commit()
+        session.refresh(item_to_update)
+
+
+    print(f'{item_to_update=}')
 
     # # with db as session:
-    session.commit()
-    session.refresh(item_to_update)
+    # session.commit()
+    # session.refresh(item_to_update)
     return item_to_update
 
 
