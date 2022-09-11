@@ -497,11 +497,11 @@ async def create_an_item(*, session: Session = Depends(get_session), user_email:
     # print(userpage)
     db_item = session.query(Userpage).filter(
         user_email == Userpage.email).first()
-    # db_item = session.query(DataUser).filter(
-    #     user_email == DataUser.email).first()
+
     if db_item is not None:
     #     raise HTTPException(status_code=400, detail="Userpage already exist")
-        new_item = db_item
+        # new_item = db_item
+        new_item = session.query(DataUser).filter(db_item.id == DataUser.id).first()
     else:
         new_item = DataUser()
     user_id = db_item.id
