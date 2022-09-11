@@ -206,7 +206,73 @@ class DataPage1(SQLModel, table=True):
     fitness_id:Optional[int] = Field(default=None, foreign_key="fitness.id")
     fitness: Optional[Fitness] = Relationship(back_populates="page1Data")
 
+class DataUser(SQLModel, table=True):
+    # __tablename__='datapage1'    
+    id:Optional[int] = Field(default=None, primary_key=True)
 
+
+    man : bool #Column(Boolean, default = False)#": true,
+    woman : bool #Column(Boolean, default = False)#": false
+
+    age : int #Column(Integer, nullable= False)#": 30,
+    date : str #Column(Date, nullable = False)#": "May 4, 2022 12:19:31 PM",
+    desired_weight: float #Column(Float(10, 2))#": 50.0,
+    height : int #Column(Integer, nullable= False)#": 20,
+    weight : float #Column(Float(10, 2))#": 40.0
+
+    minimalPhysicalActive : bool #Column(Boolean, default = False)#": false
+    fastWalkOnFoot : bool #Column(Boolean, default = False)#": true,
+    examine1_2TimesWeek : bool #Column(Boolean, default = False)#": false,
+    examine3_5TimesWeek : bool #Column(Boolean, default = False)#": false,
+    everyDayFitness : bool #Column(Boolean, default = False)#": false,
+    date : str #Column(Date, nullable = False)#": "May 4, 2022 12:20:25 PM",
+    
+    
+    Nothing : bool = False #Column(Boolean, default = False)#": false,
+    date : str = "" #Column(Date, nullable = False)#": "May 4, 2022 12:20:55 PM",
+    fastFood : bool = False #Column(Boolean, default = False)#": true,
+    fastSugar : bool = False #Column(Boolean, default = False)#": false,
+    laterNight : bool = False #Column(Boolean, default = False)#": true
+    
+
+
+    chicken : bool #Column(Boolean, default = False)#": false,
+    tyrkey : bool #Column(Boolean, default = False)#": true,
+    pork : bool #Column(Boolean, default = False)#": true,
+    meat : bool #Column(Boolean, default = False)#": false,
+    seaFood : bool #Column(Boolean, default = False)#": true,
+    fish : bool #Column(Boolean, default = False)#": true,
+    withoutMeat : bool #Column(Boolean, default = False)#": false
+    withoutFish : bool #Column(Boolean, default = False)#": false,
+    
+    zucchini : bool #Column(Boolean, default = False)#": false
+    tomato : bool #Column(Boolean, default = False)#": true,
+    eggplant : bool #Column(Boolean, default = False)#": true,
+    cauliflower : bool #Column(Boolean, default = False)#": false,
+    cucumbers : bool #Column(Boolean, default = False)#": false,
+    broccoli : bool #Column(Boolean, default = False)#": true,
+    mushrooms : bool #Column(Boolean, default = False)#": true,
+    avocado : bool #Column(Boolean, default = False)#": false,
+
+    egg : bool #Column(Boolean, default = False)#": false,
+    cheese : bool #Column(Boolean, default = False)#": true,
+    nuts : bool #Column(Boolean, default = False)#": true,
+    cottage : bool #Column(Boolean, default = False)#": false,
+    kefir : bool #Column(Boolean, default = False)#": false,
+    yogurt : bool #Column(Boolean, default = False)#": true
+
+    workOffice : bool #Column(Boolean, default = False)#": false
+    regularTraffic : bool #Column(Boolean, default = False)#": true,
+    OnFoot : bool #Column(Boolean, default = False)#": false,
+    InHome : bool #Column(Boolean, default = False)#": false,
+
+    waterWithoutGas : bool #Column(Boolean, default = False)#": false
+    waterSugarGas : bool #Column(Boolean, default = False)#": true,
+    coffee : bool #Column(Boolean, default = False)#": false,
+    tea : bool #Column(Boolean, default = False)#": false,
+    
+    fitness_id:Optional[int] = Field(default=None, foreign_key="fitness.id")
+    # fitness: Optional[Fitness] = Relationship(back_populates="page1Data")
 
 # # class Book(SQLModel, table=True):
 # #     id:Optional[int]=Field(default=None, primary_key=True)

@@ -67,12 +67,18 @@ async def create_an_item(*, session: Session = Depends(get_session), item: Userp
         print("no")
         raise HTTPException(status_code=400, detail="Userpage already exist")
     new_item = Userpage(
-        fullname=item.fullname,
+        fullName=item.fullName,
         email=item.email,
         password=item.password,
+        
     )
+    
 
     # with db as session:
+    session.add(new_item)
+    session.commit()
+    session.refresh(new_item)
+    new_item.fitness_id = new_item.id
     session.add(new_item)
     session.commit()
     session.refresh(new_item)
@@ -159,13 +165,7 @@ async def patch_an_itemus(*, session: Session = Depends(get_session), user_id: i
     metadata_obj = MetaData()
     metadata_obj.reflect(bind=engine, views=False)
     reversed(metadata_obj.sorted_tables)
-# dir(classes)=['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', 
-# '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', 
-# '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__',
-#  '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__',
-#  '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__',
-#  '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend',
-#  'index', 'insert', 'pop', 'remove', 'reverse', 'sort'] 
+
 
     for i,cll in enumerate(classes):
         with Session(engine) as session:
@@ -210,6 +210,38 @@ async def patch_an_itemus(*, session: Session = Depends(get_session), user_id: i
 
 
     return {**{"id": user_id}, **d }  # dict(id = 5)
+
+@app.get('/fit_get_one_user_email/',   status_code=status.HTTP_200_OK)
+# , Authorization: str = Header(None)):
+async def get_an_item_email(*, session: Session = Depends(get_session), emailQuery: str, passwQuery: str):
+    # with db as session:
+    # item = {"item_id": item_id}
+    item = {}
+    # if idQuery:
+    # item.update({"idQuery": idQuery})
+    if emailQuery:
+        item.update({"emailQuery": emailQuery})
+    if passwQuery:
+        item.update({"passwQuery": passwQuery})
+    print('--------_____________-------____________')
+    statement = select(Userpage).where(Userpage.email == emailQuery).where(
+        Userpage.password == passwQuery)
+    item_to_update = session.exec(statement).first()
+    print(f' 1 { item_to_update= }')
+    print(f' 2 { dict(list(item_to_update)[1:])= }')
+
+    # print(f' { item_to_update= }')
+    # item_to_update.fullName = userName.fullName
+    # item_to_update.email = userName.email
+    # item_to_update.passwordFB = userName.passwordFB
+    # item_to_update.fitness_id = userName.id
+
+    # # # with db as session:
+    # session.commit()
+    # session.refresh(item_to_update)
+
+    return dict(list(item_to_update)[1:])
+
 
 @app.post('/fit_new_weight_day/{user_id}',  status_code=status.HTTP_201_CREATED)
 async def create_new_menu_day(*, session_recycl: Session = Depends(get_session_recycl),
@@ -398,7 +430,110 @@ async def patch_an_item(*, session: Session = Depends(get_session), user_id: int
 
 
 #     return {**{"id": user_id}, **dct}
+# @app.exception_handler(RequestValidationError)
+# async def validation_exception_handler(
+#     request: Request,
+#     exc: RequestValidationError
+# ):
+#     return JSONResponse(
+#         status_code=status.HTTP_400_BAD_REQUEST,
+#         content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
+#     )
 
+@app.get('/get_one_data_user/{user_id}',  status_code=status.HTTP_201_CREATED)
+async def create_an_item(*, session: Session = Depends(get_session), user_id: int,
+                        #  datauser: DataUser,
+                         # id: str,
+                         ):
+    # print(userpage)
+    print('1 ________________-------------__________')
+    db_item = session.query(DataUser).filter(
+        user_id == DataUser.id).first()
+    # # db_item = session.query(DataUser).filter(
+    # #     user_email == DataUser.email).first()
+    # # if db_item is not None:
+    # # #     raise HTTPException(status_code=400, detail="Userpage already exist")
+    # #     new_item = db_item
+    # # else:
+    # #     new_item = DataUser()
+    # # user_id = db_item.id
+    # # args_class = [p[1] for p in locals().items() if 'page' in p[0]]
+    # # args_param = [p[0] for p in locals().items() if 'page' in p[0]]
+    # print(f' {db_item=}')
+    # print('________________-------------__________')
+
+
+    diction = {}
+    metadata_obj = MetaData()
+    metadata_obj.reflect(bind=engine)
+
+    # # new_item = DataUser()
+    # # print(f' {dir(metadata_obj.tables)=}', sep = "\n\n\n")
+    # # datauser.id = db_item.id
+    # # datauser.fitness_id = db_item.id
+    # new_item = db_item # datauser
+    for j, (g,k) in enumerate(db_item):#  datauser):
+        if j>0:
+            dict_dclass = {g: k}
+            diction = {**diction, **dict_dclass}
+    # print(f'{diction=} {dict_dclass=}')
+
+    # session.query(DataUser).filter(DataUser.id == db_item.id).delete()
+    # session.commit()
+
+    # session.add(new_item)
+    # session.commit()
+    # session.refresh(new_item)
+
+
+    return {**diction}
+
+
+@app.post('/fit_new_user_hilt/{user_email}',  status_code=status.HTTP_201_CREATED)
+async def create_an_item(*, session: Session = Depends(get_session), user_email: str,
+                         datauser: DataUser,
+                         # id: str,
+                         ):
+    # print(userpage)
+    db_item = session.query(Userpage).filter(
+        user_email == Userpage.email).first()
+    # db_item = session.query(DataUser).filter(
+    #     user_email == DataUser.email).first()
+    if db_item is not None:
+    #     raise HTTPException(status_code=400, detail="Userpage already exist")
+        new_item = db_item
+    else:
+        new_item = DataUser()
+    user_id = db_item.id
+    args_class = [p[1] for p in locals().items() if 'page' in p[0]]
+    args_param = [p[0] for p in locals().items() if 'page' in p[0]]
+    print('________________-------------__________')
+
+
+    diction = {}
+    metadata_obj = MetaData()
+    metadata_obj.reflect(bind=engine)
+
+    # new_item = DataUser()
+    # print(f' {dir(metadata_obj.tables)=}', sep = "\n\n\n")
+    datauser.id = db_item.id
+    datauser.fitness_id = db_item.id
+    new_item = datauser
+    for j, (g,k) in enumerate(datauser):
+        if j>0:
+            dict_dclass = {g: k}
+            diction = {**diction, **dict_dclass}
+    print(f'{diction=} {dict_dclass=}')
+
+    session.query(DataUser).filter(DataUser.id == db_item.id).delete()
+    session.commit()
+
+    session.add(new_item)
+    session.commit()
+    session.refresh(new_item)
+
+
+    return {**diction}
 
 @app.post('/fit_new_user/',  status_code=status.HTTP_201_CREATED)
 async def create_an_item(*, session: Session = Depends(get_session),
@@ -1158,35 +1293,35 @@ async def delete_one_menu_day(*, session_recycl: Session = Depends(get_session_r
     #  http://195.234.208.168:8085/fit_get_one_user/?id=26&email=x5c%40x4c.x4c&password=123456
 
 
-@app.get('/fit_get_one_user_email/',   status_code=status.HTTP_200_OK)
-# , Authorization: str = Header(None)):
-async def get_an_item_email(*, session: Session = Depends(get_session), emailQuery: str, passwQuery: str):
-    # with db as session:
-    # item = {"item_id": item_id}
-    item = {}
-    # if idQuery:
-    # item.update({"idQuery": idQuery})
-    if emailQuery:
-        item.update({"emailQuery": emailQuery})
-    if passwQuery:
-        item.update({"passwQuery": passwQuery})
-    print('--------_____________-------____________')
-    statement = select(Userpage).where(Userpage.email == emailQuery).where(
-        Userpage.passwordFB == passwQuery)
-    item_to_update = session.exec(statement).first()
-    print(f' 1 { item_to_update= }')
+# @app.get('/fit_get_one_user_email/',   status_code=status.HTTP_200_OK)
+# # , Authorization: str = Header(None)):
+# async def get_an_item_email(*, session: Session = Depends(get_session), emailQuery: str, passwQuery: str):
+#     # with db as session:
+#     # item = {"item_id": item_id}
+#     item = {}
+#     # if idQuery:
+#     # item.update({"idQuery": idQuery})
+#     if emailQuery:
+#         item.update({"emailQuery": emailQuery})
+#     if passwQuery:
+#         item.update({"passwQuery": passwQuery})
+#     print('--------_____________-------____________')
+#     statement = select(Userpage).where(Userpage.email == emailQuery).where(
+#         Userpage.passwordFB == passwQuery)
+#     item_to_update = session.exec(statement).first()
+#     print(f' 1 { item_to_update= }')
 
-    # print(f' { item_to_update= }')
-    # item_to_update.fullName = userName.fullName
-    # item_to_update.email = userName.email
-    # item_to_update.passwordFB = userName.passwordFB
-    # item_to_update.fitness_id = userName.id
+#     # print(f' { item_to_update= }')
+#     # item_to_update.fullName = userName.fullName
+#     # item_to_update.email = userName.email
+#     # item_to_update.passwordFB = userName.passwordFB
+#     # item_to_update.fitness_id = userName.id
 
-    # # # with db as session:
-    # session.commit()
-    # session.refresh(item_to_update)
+#     # # # with db as session:
+#     # session.commit()
+#     # session.refresh(item_to_update)
 
-    return item_to_update
+#     return item_to_update
 
     # dict_result = {'id': recyclpage.id}  # result.id}
     # diction = {**diction, **dict(list(new_item)[1:])}
